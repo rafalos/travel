@@ -9,13 +9,17 @@ function RegisterPage() {
 
   async function registerHandler(e) {
     e.preventDefault();
-    await axios.post('/register', {
-      name,
-      email,
-      password,
-    });
+    try {
+      await axios.post('/register', {
+        name,
+        email,
+        password,
+      });
 
-    alert('Registration succesfull, now you can log in');
+      alert('Registration succesfull, now you can log in');
+    } catch (error) {
+      alert('Registration failed, please try again');
+    }
   }
 
   return (

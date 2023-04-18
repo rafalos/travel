@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
 function IndexPage() {
+  const { user } = useContext(UserContext);
   return (
     <div>
-      Index
+      <h1>index</h1>
+      {user && user.email}
     </div>
   );
 }
