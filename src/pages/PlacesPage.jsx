@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import AccountNav from '../components/Account/Navigation';
 import axios from 'axios';
 
@@ -17,7 +17,6 @@ function PlacesPage() {
 
   return (
     <div>
-      <AccountNav />
       <div className='text-center'>
         <Link
           className='inline-flex gap-1 bg-primary text-white py-2 px-6 rounded-full'

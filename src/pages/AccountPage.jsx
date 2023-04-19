@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../UserContext';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Outlet, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import PlacesPage from './PlacesPage';
 import Navigation from '../components/Account/Navigation';
@@ -9,7 +9,10 @@ function AccountPage() {
   const { ready, user, setUser } = useContext(UserContext);
   const [redirect, setRedirect] = useState(null);
   const navigate = useNavigate();
-  let { subpage } = useParams();
+  let { pathname } = useLocation();
+
+  const splitPath = pathname.split('/')
+  const location = splitPath[splitPath.length -1]
 
   async function logoutHandler() {
     await axios.post('/logout');
@@ -17,9 +20,6 @@ function AccountPage() {
     setUser(null);
   }
 
-  if (subpage === undefined) {
-    subpage = 'profile';
-  }
   if (redirect) {
     navigate(redirect);
   }
@@ -35,7 +35,7 @@ function AccountPage() {
   return (
     <div>
       <Navigation />
-      {subpage === 'profile' && (
+      {location === 'account' && (
         <div className='text-center max-w-lg mx-auto'>
           Logged in as {user.name} ({user.email})
           <button onClick={logoutHandler} className='primary max-w-sm mt-2'>
@@ -43,7 +43,7 @@ function AccountPage() {
           </button>
         </div>
       )}
-      {subpage === 'places' && <PlacesPage />}
+      {location !== 'account' && <Outlet />}
     </div>
   );
 }

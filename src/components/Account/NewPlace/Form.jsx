@@ -86,7 +86,6 @@ function PlacesForm() {
 
   return (
     <div>
-      <AccountNav />
       <form onSubmit={saveHandler}>
         {preInput('Title', 'Title for your place. Should be short and catchy')}
         <input
