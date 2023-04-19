@@ -35,9 +35,15 @@ function PlacesPage() {
 
   async function addPhotoByLink(e) {
     e.preventDefault();
-    await axios.post('/upload-by-link', {
+    const { data: filename } = await axios.post('/upload-by-link', {
       link: photoLink,
     });
+
+    setAddedPhotos((prevState) => {
+      return [...prevState, filename];
+    });
+
+    setPhotoLink('');
   }
 
   return (
@@ -107,8 +113,20 @@ function PlacesPage() {
                 Add&nbsp;photo
               </button>
             </div>
-            <div className='mt-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6'>
-              <button className='flex gap-1 justify-center border bg-transparent rounded-2xl p-8 text-2xl text-gray-600'>
+
+            <div className='mt-2 grid gap-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-6'>
+              {addedPhotos.length > 0 &&
+                addedPhotos.map((link) => (
+                  <div>
+                    <img
+                      className='rounded-2xl'
+                      src={'http://localhost:4000/uploads/' + link}
+                      alt=''
+                    />
+                  </div>
+                ))}
+              <label className='cursor-pointer flex items-center gap-1 justify-center border bg-transparent rounded-2xl p-2 text-2xl text-gray-600'>
+                <input type='file' className='hidden' />
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   viewBox='0 0 24 24'
@@ -122,7 +140,7 @@ function PlacesPage() {
                   />
                 </svg>
                 Upload
-              </button>
+              </label>
             </div>
             {preInput('Description', 'Describe your place as best as you can')}
             <textarea
