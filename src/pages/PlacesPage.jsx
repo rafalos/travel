@@ -33,6 +33,21 @@ function PlacesPage() {
     );
   }
 
+  async function uploadPhotoHandler(e) {
+    const files = e.target.files;
+    const data = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      data.append('photos', files[i]);
+    }
+    const response = await axios.post('/upload', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    setAddedPhotos((prevState) => [...prevState, ...response.data]);
+  }
+
   async function addPhotoByLink(e) {
     e.preventDefault();
     const { data: filename } = await axios.post('/upload-by-link', {
@@ -126,7 +141,12 @@ function PlacesPage() {
                   </div>
                 ))}
               <label className='cursor-pointer flex items-center gap-1 justify-center border bg-transparent rounded-2xl p-2 text-2xl text-gray-600'>
-                <input type='file' className='hidden' />
+                <input
+                  multiple
+                  type='file'
+                  className='hidden'
+                  onChange={uploadPhotoHandler}
+                />
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   viewBox='0 0 24 24'
