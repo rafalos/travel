@@ -8,7 +8,7 @@ import axios from 'axios';
 import { UserContextProvider } from './UserContext';
 import AccountPage from './pages/AccountPage';
 import PlacesPage from './pages/PlacesPage';
-import Form from '../components/Account/NewPlace/Form';
+import Form from './components/Account/NewPlace/Form';
 import PlacePage from './pages/PlacePage';
 
 axios.defaults.baseURL = 'http://localhost:4000';

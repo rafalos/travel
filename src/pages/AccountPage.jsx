@@ -3,7 +3,7 @@ import { UserContext } from '../UserContext';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import PlacesPage from './PlacesPage';
-import Navigation from '../../components/Account/Navigation';
+import Navigation from '../components/Account/Navigation';
 
 function AccountPage() {
   const { ready, user, setUser } = useContext(UserContext);
