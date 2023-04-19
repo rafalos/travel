@@ -30,4 +30,11 @@ To be implemented:
 
 ## Running project locally
 
-TBD
+```
+cd api
+npm install
+npm run dev
+cd ..
+npm install
+npm run dev
+```
