@@ -10,7 +10,7 @@ function RegisterPage() {
   async function registerHandler(e) {
     e.preventDefault();
     try {
-      await axios.post('/register', {
+      await axios.post('/auth/register', {
         name,
         email,
         password,

@@ -5,7 +5,7 @@ import Navigation from './Navigation';
 
 function Header() {
   return (
-    <header className='flex justify-between w-full'>
+    <header className='flex' style={{justifyContent: 'space-between'}}>
       <Brand />
       <Navigation />
       <Profile />
