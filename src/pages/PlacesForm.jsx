@@ -3,6 +3,7 @@ import Perks from '../Perks';
 import axios from 'axios';
 import PhotosUploader from '../PhotosUploader';
 import { useNavigate } from 'react-router-dom';
+import AccountNav from '../AccountNav';
 
 function PlacesForm() {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ function PlacesForm() {
 
   return (
     <div>
+      <AccountNav />
       <form onSubmit={addNewPlaceHandler}>
         {preInput('Title', 'Title for your place. Should be short and catchy')}
         <input
