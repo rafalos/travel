@@ -1,6 +1,6 @@
 # Travel
 
-Hotel booking app airbnb inspired created mainly to train my React
+Hotel booking app airbnb inspired created mainly to train my React skills
 
 ## Hosted version
 
