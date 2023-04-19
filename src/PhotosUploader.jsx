@@ -19,7 +19,8 @@ function PhotosUploader({ addedPhotos, onPhotosAdded }) {
     onPhotosAdded((prevState) => [...prevState, ...response.data]);
   }
 
-  function removePhotoHandler(link) {
+  function removePhotoHandler(e, link) {
+    e.preventDefault();
     onPhotosAdded((prevState) => {
       const newPhotos = prevState.filter((photo) => photo !== link);
       return newPhotos;
@@ -76,7 +77,7 @@ function PhotosUploader({ addedPhotos, onPhotosAdded }) {
                 alt=''
               />
               <button
-                onClick={() => removePhotoHandler(link)}
+                onClick={(e) => removePhotoHandler(e, link)}
                 className='absolute bottom-1 right-1 text-white bg-black py-2 px-3 bg-opacity-50 rounded-2xl cursor-pointer'
               >
                 <svg
