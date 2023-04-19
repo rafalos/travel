@@ -1,16 +1,14 @@
 import React from 'react';
-import Header from './Header';
+import Header from '../components/Header/Header';
 import { Outlet } from 'react-router-dom';
 
 function Layout() {
   return (
-    <div className='py-4 px-8 flex flex-col min-h-screen'>
+    <div className='p-4 flex flex-col min-h-screen'>
       <Header />
-      <div className='flex justify-center'>
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
-  );
+  )
 }
 
-export default Layout;
+export default Layout

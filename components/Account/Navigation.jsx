@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-function AccountNav() {
+function Navigation() {
   const { pathname } = useLocation();
   let subpage = pathname.split('/')?.[2];
   if (subpage === undefined) {
@@ -67,4 +67,4 @@ function AccountNav() {
   );
 }
 
-export default AccountNav;
+export default Navigation;

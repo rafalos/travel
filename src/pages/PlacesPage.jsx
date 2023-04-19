@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import AccountNav from '../AccountNav';
+import AccountNav from '../../components/Account/Navigation';
 import axios from 'axios';
 
 function PlacesPage() {

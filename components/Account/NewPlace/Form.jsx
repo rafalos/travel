@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Perks from '../Perks';
+import Perks from '../../../src/Perks';
 import axios from 'axios';
-import PhotosUploader from '../PhotosUploader';
+import PhotosUploader from '../../../src/PhotosUploader';
 import { useNavigate, useParams } from 'react-router-dom';
-import AccountNav from '../AccountNav';
+import AccountNav from '../Navigation';
 
 function PlacesForm() {
   const { id } = useParams();
