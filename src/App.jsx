@@ -23,6 +23,7 @@ function App() {
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/account' element={<AccountPage />} />
           <Route path='/account/places/' element={<PlacesPage />} />
+          <Route path='/account/places/:id' element={<PlacesForm />} />
           <Route path='/account/places/new' element={<PlacesForm />} />
         </Route>
       </Routes>

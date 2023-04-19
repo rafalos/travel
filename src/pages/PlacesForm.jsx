@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Perks from '../Perks';
 import axios from 'axios';
 import PhotosUploader from '../PhotosUploader';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import AccountNav from '../AccountNav';
 
 function PlacesForm() {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [address, setAddress] = useState('');
@@ -16,6 +17,25 @@ function PlacesForm() {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [maxGuests, setMaxGuests] = useState(1);
+
+  useEffect(() => {
+    if (!id) return;
+    const fetchPlace = async () => {
+      const response = await axios.get(`/places/${id}`);
+      const { data } = response;
+      setTitle(data.title);
+      setAddress(data.address);
+      setAddedPhotos(data.photos);
+      setDescription(data.description);
+      setPerks(data.perks);
+      setExtraInfo(data.extraInfo);
+      setCheckIn(data.checkIn);
+      setCheckOut(data.checkOut);
+      setMaxGuests(data.maxGuests);
+    };
+
+    fetchPlace();
+  }, [id]);
 
   function inputHeader(text) {
     return <h2 className='text-2xl mt-4'>{text}</h2>;
@@ -34,7 +54,7 @@ function PlacesForm() {
     );
   }
 
-  async function addNewPlaceHandler(e) {
+  async function saveHandler(e) {
     e.preventDefault();
     const placeData = {
       title,
@@ -47,14 +67,24 @@ function PlacesForm() {
       checkOut,
       maxGuests,
     };
-    await axios.post('/places', placeData);
-    navigate('/account/places');
+
+    if (id) {
+      const data = {
+        id,
+        ...placeData,
+      };
+      await axios.put('/places', data);
+      navigate('/account/places');
+    } else {
+      await axios.post('/places', placeData);
+      navigate('/account/places');
+    }
   }
 
   return (
     <div>
       <AccountNav />
-      <form onSubmit={addNewPlaceHandler}>
+      <form onSubmit={saveHandler}>
         {preInput('Title', 'Title for your place. Should be short and catchy')}
         <input
           value={title}
