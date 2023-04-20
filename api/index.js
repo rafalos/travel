@@ -12,6 +12,8 @@ const multer = require('multer');
 const fs = require('fs');
 const Place = require('./models/Place');
 const authRoutes = require('./routes/auth');
+const Booking = require('./models/Booking');
+const getUserDataFromToken = require('./utils');
 
 mongoose.connect(process.env.MONGO_URL);
 
@@ -37,7 +39,6 @@ app.get('/profile', (req, res) => {
       if (err) {
         throw err;
       } else {
-        console.log(data);
         const { name, email, _id } = await User.findById(data.id);
         res.json({ name, email, _id });
       }
@@ -189,6 +190,35 @@ app.put('/places', async (req, res) => {
       res.json('ok');
     }
   });
+});
+
+app.post('/bookings', async (req, res) => {
+  const userData = await getUserDataFromToken(req);
+  const { id } = userData;
+  const { place, checkIn, checkOut, numberOfGuests, name, phone, price } =
+    req.body;
+
+  const booking = await Booking.create({
+    user: id,
+    place,
+    checkIn,
+    checkOut,
+    numberOfGuests,
+    name,
+    phone,
+    price,
+  });
+
+  res.json(booking);
+});
+
+app.get('/bookings', async (req, res) => {
+  const userData = await getUserDataFromToken(req);
+
+  const bookings = await Booking.find({
+    user: userData.id,
+  });
+  res.json(bookings);
 });
 
 app.listen(4000);
