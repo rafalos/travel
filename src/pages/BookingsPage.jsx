@@ -11,7 +11,7 @@ function BookingsPage() {
     };
 
     getBookings();
-  });
+  },[]);
   return (
     <div>
       {bookings?.length > 0 &&

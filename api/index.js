@@ -217,7 +217,7 @@ app.get('/bookings', async (req, res) => {
 
   const bookings = await Booking.find({
     user: userData.id,
-  });
+  }).populate('place');
   res.json(bookings);
 });
 
